@@ -93,10 +93,10 @@ class Slownie
 
                 $pKw = substr($kw_w, ($i * 3), 3);
 
-                $kw_w_s = ($pKw{1} != 1) ? self::getHundredForm($pKw{0}) . ' ' . self::getDozenForm($pKw{1}) . ' ' . self::getUnitForm($pKw{2}) : self::getHundredForm($pKw{0}) . ' ' . self::getTenthForm($pKw{2});
-                if (($pKw{0} == 0) && ($pKw{2} == 1) && ($pKw{1} < 1)) {
+                $kw_w_s = ($pKw{1} != 1) ? self::getHundredForm($pKw[0]) . ' ' . self::getDozenForm($pKw[1]) . ' ' . self::getUnitForm($pKw[2]) : self::getHundredForm($pKw[0]) . ' ' . self::getTenthForm($pKw[2]);
+                if (($pKw[0] == 0) && ($pKw[2] == 1) && ($pKw[1] < 1)) {
                     $form = $table[0];
-                } elseif (($pKw{2} > 1 && $pKw{2} < 5) && $pKw{1} != 1) {
+                } elseif (($pKw[2] > 1 && $pKw[2] < 5) && $pKw[1] != 1) {
                     $form = $table[2];
                 } else {
                     $form = $table[1];
