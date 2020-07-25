@@ -1,7 +1,12 @@
 {
   "name": "vlaim/slownie",
   "description": "A library for writing numbers in word form in Polish",
-  "keywords": ["polish", "polish-language", "number-to-words", "currency"],
+  "keywords": [
+    "polish",
+    "polish-language",
+    "number-to-words",
+    "currency"
+  ],
   "type": "library",
   "license": "MIT",
   "authors": [

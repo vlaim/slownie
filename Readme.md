@@ -30,7 +30,7 @@ Use composer to install this package.
 Slownie::convert(10348) // dziesięć tysięcy trzysta czterdzieści osiem złotych
 ```
 
-To hide 'złoty' / 'złotych' / 'złote' pass `false` as the second param
+To hide złoty / złotych / złote pass `false` as the second param
 
 ```
 Slownie::convert(10348, false) //  dziesięć tysięcy trzysta czterdzieści osiem
