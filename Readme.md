@@ -1,6 +1,8 @@
 # Słownie
 
 [![Build Status](https://travis-ci.com/vlaim/slownie.svg?token=yjpboQ1s7oorxyxVXyou&branch=master)](https://travis-ci.com/vlaim/slownie)
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Software License][ico-license]](LICENSE.md)
 
 🇵🇱 Ta biblioteka pomaga zapisać liczby w postaci słownej.
 
@@ -13,7 +15,7 @@ This library helps you to write numbers into words in Polish.
 ## Basic usage 
 
 ```
-Slownie::convert(1008) //  => jeden tysiąc osiem złotych
+Slownie::convert(10348) //  => dziesięć tysięcy trzysta czterdzieści osiem złotych
 ```
 
 ## Tests
@@ -34,6 +36,9 @@ Feel free to open an issue on every question you have.
 
 **vlaim/slownie** is released under the MIT License. See the bundled LICENSE.md for details.
 
+[ico-version]: https://img.shields.io/packagist/v//vlaim/slownie.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 
+[link-packagist]: https://packagist.org/packages/vlaim/slownie
 
 
