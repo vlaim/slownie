@@ -12,13 +12,25 @@ This library helps you to write numbers into words in Polish.
 
 ## Installation
 
+### Composer package
+Use composer to install this package.
+
+```
+{
+    "require": {
+        "vlaim/slownie": "1.0.*"
+    }
+}
+```
+
+
 ## Basic usage 
 
 ```
 Slownie::convert(10348) // dziesięć tysięcy trzysta czterdzieści osiem złotych
 ```
 
-To hide 'złoty' / 'złotych' / 'złote' pass `false` to the second param
+To hide 'złoty' / 'złotych' / 'złote' pass `false` as the second param
 
 ```
 Slownie::convert(10348, false) //  dziesięć tysięcy trzysta czterdzieści osiem
