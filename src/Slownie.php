@@ -35,6 +35,11 @@ class Slownie
         return !is_null($key) ? $source[$key] ?? [] : $source;
     }
 
+    /**
+     * @param string $key
+     *
+     * @return string
+     */
     protected static function getHundredForm(string $key): string
     {
         $source = ['', 'sto', 'dwieście', 'trzysta', 'czterysta', 'pięćset', 'sześćset', 'siedemset', 'osiemset', 'dziewięćset'];
@@ -42,6 +47,11 @@ class Slownie
         return $source[$key];
     }
 
+    /**
+     * @param string $key
+     *
+     * @return string
+     */
     protected static function getDozenForm(string $key): string
     {
         $source = ['', 'dziesięć', 'dwadzieścia', 'trzydzieści', 'czterdzieści', 'pięćdziesiąt', 'sześćdziesiąt', 'siedemdziesiąt', 'osiemdziesiąt', 'dziewięćdziesiąt'];
@@ -49,6 +59,11 @@ class Slownie
         return $source[$key];
     }
 
+    /**
+     * @param string $key
+     *
+     * @return string
+     */
     protected static function getUnitForm(string $key): string
     {
         $source = ['', 'jeden', 'dwa', 'trzy', 'cztery', 'pięć', 'sześć', 'siedem', 'osiem', 'dziewięć'];
@@ -56,6 +71,11 @@ class Slownie
         return $source[$key];
     }
 
+    /**
+     * @param string $key
+     *
+     * @return string
+     */
     protected static function getTenthForm(string $key): string
     {
         $source = ['dziesięć', 'jedenaście', 'dwanaście', 'trzynaście', 'czternaście', 'piętnaście', 'szesnaście', 'siednaście', 'osiemnaście', 'dziewiętnaście'];
@@ -65,10 +85,11 @@ class Slownie
 
     /**
      * @param number|string $number
+     * @param bool          $isPlnShown
      *
      * @return string
      */
-    final public static function convert($number): string
+    final public static function convert($number, bool $isPlnShown = true): string
     {
         $number = intval(preg_replace("/\s+/", '', (string) $number));
 
@@ -93,6 +114,8 @@ class Slownie
 
                 $pKw = substr($kw_w, ($i * 3), 3);
 
+
+
                 $kw_w_s = ($pKw[1] != 1) ? self::getHundredForm($pKw[0]) . ' ' . self::getDozenForm($pKw[1]) . ' ' . self::getUnitForm($pKw[2]) : self::getHundredForm($pKw[0]) . ' ' . self::getTenthForm($pKw[2]);
                 if (($pKw[0] == 0) && ($pKw[2] == 1) && ($pKw[1] < 1)) {
                     $form = $table[0];
@@ -102,7 +125,15 @@ class Slownie
                     $form = $table[1];
                 }
 
-                $amountInWords .= $kw_w_s . ' ' . $form . ' ';
+                $amountInWords .= $kw_w_s . ' ';
+
+                if ($p_tmp != 0 || $isPlnShown) {
+                    $amountInWords .= $form . ' ';
+                }
+
+
+
+
                 $p_tmp--;
             }
         }

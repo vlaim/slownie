@@ -27,6 +27,21 @@ final class SlownieTest extends TestCase
         $this->assertSame('jeden złoty', Slownie::convert(1.00));
     }
 
+    public function testIs1CorrectIntegerWithoutPLN(): void
+    {
+        $this->assertSame('jeden', Slownie::convert(1, false));
+    }
+
+    public function testIs1CorrectStringWithoutPLN(): void
+    {
+        $this->assertSame('jeden', Slownie::convert('1', false));
+    }
+
+    public function testIs1CorrectFloatWithoutPLN(): void
+    {
+        $this->assertSame('jeden', Slownie::convert(1.00, false));
+    }
+
     public function testIs10Correct(): void
     {
         $this->assertSame('dziesięć złotych', Slownie::convert(10));

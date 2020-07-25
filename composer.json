@@ -1,5 +1,7 @@
 {
   "name": "vlaim/slownie",
+  "description": "A library for writing numbers in word form in Polish",
+  "keywords": ["polish", "polish-language", "number-to-words", "currency"],
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -10,7 +12,7 @@
     }
   ],
   "require": {
-    "php": ">=7.1"
+    "php": ">=7.2"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.16",

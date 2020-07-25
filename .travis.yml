@@ -10,4 +10,5 @@ install:
   - travis_retry composer install --no-interaction --no-suggest --prefer-dist
 
 script:
+  - composer phpstan
   - composer test
