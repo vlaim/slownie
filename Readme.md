@@ -15,7 +15,13 @@ This library helps you to write numbers into words in Polish.
 ## Basic usage 
 
 ```
-Slownie::convert(10348) //  => dziesięć tysięcy trzysta czterdzieści osiem złotych
+Slownie::convert(10348) // dziesięć tysięcy trzysta czterdzieści osiem złotych
+```
+
+To hide 'złoty' / 'złotych' / 'złote' pass `false` to the second param
+
+```
+Slownie::convert(10348, false) //  dziesięć tysięcy trzysta czterdzieści osiem
 ```
 
 ## Tests

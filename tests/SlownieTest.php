@@ -29,17 +29,17 @@ final class SlownieTest extends TestCase
 
     public function testIs1CorrectIntegerWithoutPLN(): void
     {
-        $this->assertSame('jeden', Slownie::convert(1, false));
+        $this->assertSame('jeden', Slownie::convert(1, true));
     }
 
     public function testIs1CorrectStringWithoutPLN(): void
     {
-        $this->assertSame('jeden', Slownie::convert('1', false));
+        $this->assertSame('jeden', Slownie::convert('1', true));
     }
 
     public function testIs1CorrectFloatWithoutPLN(): void
     {
-        $this->assertSame('jeden', Slownie::convert(1.00, false));
+        $this->assertSame('jeden', Slownie::convert(1.00, true));
     }
 
     public function testIs10Correct(): void

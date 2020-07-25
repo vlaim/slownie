@@ -85,38 +85,38 @@ class Slownie
 
     /**
      * @param number|string $number
-     * @param bool          $isPlnShown
+     * @param bool          $isPlnHidden
      *
      * @return string
      */
-    final public static function convert($number, bool $isPlnShown = true): string
+    final public static function convert($number, bool $isPlnHidden = false): string
     {
         $number = intval(preg_replace("/\s+/", '', (string) $number));
 
         $amountInWords = '';
 
         if ($number != '') {
-            $l_pad = '';
-            $kw_w = '';
+            $lPad = '';
+            $kwW = '';
             $number = (substr_count((string) $number, ',') == 0) ? $number . ',00' : $number;
+
             $tmp = explode(',', (string) $number);
             $ln = strlen($tmp[0]);
-            $tmp_a = ($ln % 3 == 0) ? (floor($ln / 3) * 3) : ((floor($ln / 3) + 1) * 3);
-            for ($i = $ln; $i < $tmp_a; $i++) {
-                $l_pad .= '0';
-                $kw_w = $l_pad . $tmp[0];
+            $tmpA = ($ln % 3 == 0) ? (floor($ln / 3) * 3) : ((floor($ln / 3) + 1) * 3);
+            for ($i = $ln; $i < $tmpA; $i++) {
+                $lPad .= '0';
+                $kwW = $lPad . $tmp[0];
             }
-            $kw_w = ($kw_w == '') ? $tmp[0] : $kw_w;
-            $packs = (strlen($kw_w) / 3) - 1;
-            $p_tmp = $packs;
+            $kwW = ($kwW == '') ? $tmp[0] : $kwW;
+            $packs = (strlen($kwW) / 3) - 1;
+            $pTmp = $packs;
             for ($i = 0; $i <= $packs; $i++) {
-                $table = self::getCasesTable($p_tmp);
+                $table = self::getCasesTable($pTmp);
 
-                $pKw = substr($kw_w, ($i * 3), 3);
-
-
+                $pKw = substr($kwW, ($i * 3), 3);
 
                 $kw_w_s = ($pKw[1] != 1) ? self::getHundredForm($pKw[0]) . ' ' . self::getDozenForm($pKw[1]) . ' ' . self::getUnitForm($pKw[2]) : self::getHundredForm($pKw[0]) . ' ' . self::getTenthForm($pKw[2]);
+
                 if (($pKw[0] == 0) && ($pKw[2] == 1) && ($pKw[1] < 1)) {
                     $form = $table[0];
                 } elseif (($pKw[2] > 1 && $pKw[2] < 5) && $pKw[1] != 1) {
@@ -127,14 +127,11 @@ class Slownie
 
                 $amountInWords .= $kw_w_s . ' ';
 
-                if ($p_tmp != 0 || $isPlnShown) {
+                if ($pTmp != 0 || !$isPlnHidden) {
                     $amountInWords .= $form . ' ';
                 }
 
-
-
-
-                $p_tmp--;
+                $pTmp--;
             }
         }
 
