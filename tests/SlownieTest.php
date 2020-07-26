@@ -12,53 +12,76 @@ final class SlownieTest extends TestCase
         $this->assertTrue(class_exists('Slownie\Slownie'));
     }
 
+    public function testIsNegativeNumberThrowsException(): void
+    {
+        $message = '';
+
+        try {
+            Slownie::convert('-1');
+        } catch (\Exception $exception) {
+            $message = $exception->getMessage();
+        }
+
+        $this->assertEquals($message, 'Provided number should be positive');
+    }
+
+    public function testIsTooBigNumberThrowsException(): void
+    {
+        $message = '';
+
+        try {
+            Slownie::convert(1000000000000000000);
+        } catch (\Exception $exception) {
+            $message = $exception->getMessage();
+        }
+
+        $this->assertEquals($message, 'Provided number is too big');
+    }
+
     public function testIs1CorrectInteger(): void
     {
-        $this->assertSame('jeden złoty', Slownie::convert(1));
+        $this->assertSame('jeden złoty 23/100', Slownie::convert(1.23));
     }
 
     public function testIs1CorrectString(): void
     {
-        $this->assertSame('jeden złoty', Slownie::convert('1'));
+        $this->assertSame('jeden złoty 00/100', Slownie::convert('1'));
     }
 
     public function testIs1CorrectFloat(): void
     {
-        $this->assertSame('jeden złoty', Slownie::convert(1.00));
-    }
-
-    public function testIs1CorrectIntegerWithoutPLN(): void
-    {
-        $this->assertSame('jeden', Slownie::convert(1, true));
-    }
-
-    public function testIs1CorrectStringWithoutPLN(): void
-    {
-        $this->assertSame('jeden', Slownie::convert('1', true));
-    }
-
-    public function testIs1CorrectFloatWithoutPLN(): void
-    {
-        $this->assertSame('jeden', Slownie::convert(1.00, true));
+        $this->assertSame('jeden złoty 01/100', Slownie::convert(1.01));
     }
 
     public function testIs10Correct(): void
     {
-        $this->assertSame('dziesięć złotych', Slownie::convert(10));
+        $this->assertSame('dziesięć złotych 89/100', Slownie::convert(10.89));
     }
 
-    public function testIs100Correct(): void
+    public function testIs100CorrectInteger(): void
     {
-        $this->assertSame('sto cztery złote', Slownie::convert(104));
+        $this->assertSame('sto cztery złote 10/100', Slownie::convert(104.10));
     }
 
-    public function testIs1000Correct(): void
+    public function testIs100CorrectFloat(): void
     {
-        $this->assertSame('jeden tysiąc osiem złotych', Slownie::convert(1008));
+        $this->assertSame('osiemset siedemdziesiąt siedem złotych 88/100', Slownie::convert(877.88));
     }
 
-    public function testIs10000Correct(): void
+    public function testIs100CorrectString(): void
     {
-        $this->assertSame('dziesięć tysięcy trzysta czterdzieści osiem złotych', Slownie::convert('10 348'));
+        $this->assertSame('dziewięćset czterdzieści pięć złotych 03/100', Slownie::convert('945.03'));
     }
+
+    public function testIs1000CorrectInteger(): void
+    {
+        $this->assertSame('jeden tysiąc osiem złotych 00/100', Slownie::convert(1008));
+    }
+
+    public function testIs1000CorrectFloat(): void
+    {
+        $this->assertSame('dziewięć tysięcy dziewięćset dziewięćdziesiąt dziewięć złotych 34/100', Slownie::convert(9999.34));
+    }
+
+
 }
