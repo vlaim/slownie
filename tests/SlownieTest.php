@@ -108,13 +108,8 @@ final class SlownieTest extends TestCase
         $this->assertSame('dwanaście milionów trzysta trzynaście tysięcy sto dwadzieścia trzy 38/100', Slownie::convert(12313123.38, false, true));
     }
 
-
     public function testIsIntegerAsStringWithSpacesCorrect(): void
     {
         $this->assertSame('jeden milion złotych 00/100', Slownie::convert('1 000 000'));
     }
-
-
-
-
 }

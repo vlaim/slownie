@@ -27,18 +27,35 @@ Use composer to install this package.
 ## Basic usage 
 
 ```
-Slownie::convert(10348) // dziesięć tysięcy trzysta czterdzieści osiem złotych
+Slownie::convert($number, bool $hideGrosze = false, bool $hideZlote = false)
 ```
 
-To hide złoty / złotych / złote pass `false` as the second param
+$number – number to convert, integer, float or string (not recommended) can be passed here
+
+$hideGrosze - hides grosze (00/100)
+
+$hideZłote - hides złoty form
 
 ```
-Slownie::convert(10348, false) //  dziesięć tysięcy trzysta czterdzieści osiem
+Slownie::convert(10348) // dziesięć tysięcy trzysta czterdzieści osiem złotych 00/100
+```
+
+To hide grosze pass `true` as the second param
+
+```
+Slownie::convert(10348, true) //  dziesięć tysięcy trzysta czterdzieści osiem złotych
+```
+
+
+To hide złoty / złotych / złote pass `true` as the third param
+
+```
+Slownie::convert(10348, true, true) //  dziesięć tysięcy trzysta czterdzieści osiem 
 ```
 
 ## Tests
 
-To run tests: 
+To run tests
 ```
 composer test
 ```
@@ -54,7 +71,7 @@ Feel free to open an issue on every question you have.
 
 **vlaim/slownie** is released under the MIT License. See the bundled LICENSE.md for details.
 
-[ico-version]: https://img.shields.io/packagist/v//vlaim/slownie.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/vlaim/slownie.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/vlaim/slownie

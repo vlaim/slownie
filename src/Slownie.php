@@ -99,9 +99,9 @@ class Slownie
      * @param number|string $number
      * @param bool          $hideZlote
      *
-     *@return string
      *@throws OutOfRangeException
      *
+     *@return string
      */
     final public static function convert($number, bool $hideGrosze = false, bool $hideZlote = false): string
     {
