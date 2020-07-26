@@ -8,6 +8,11 @@ class Slownie
 {
     private const MAX_ALLOWED_NUMBER = 1e15;
 
+    /**
+     * Returns forms of 'złoty'
+     *
+     * @return array
+     */
     protected static function getPlnCasesTable(): array
     {
         return ['złoty', 'złotych', 'złote'];
@@ -34,6 +39,8 @@ class Slownie
     }
 
     /**
+     * Returns forms of 100/200/300/.../900
+     *
      * @param string $key
      *
      * @return string
@@ -46,6 +53,8 @@ class Slownie
     }
 
     /**
+     * Returns forms of 10/20/30/.../90
+     *
      * @param string $key
      *
      * @return string
@@ -59,6 +68,8 @@ class Slownie
     }
 
     /**
+     * Returns forms of 1/2/3/.../9
+     *
      * @param string $key
      *
      * @return string
@@ -71,6 +82,8 @@ class Slownie
     }
 
     /**
+     * Returns forms of 10/11/12/.../19
+     *
      * @param string $key
      *
      * @return string
@@ -84,13 +97,13 @@ class Slownie
 
     /**
      * @param number|string $number
-     * @param bool          $isPlnHidden
+     * @param bool          $hideZlote
      *
-     * @throws OutOfRangeException
+     *@return string
+     *@throws OutOfRangeException
      *
-     * @return string
      */
-    final public static function convert($number, bool $hideGrosze = false, bool $isPlnHidden = false): string
+    final public static function convert($number, bool $hideGrosze = false, bool $hideZlote = false): string
     {
         $grosze = explode('.', number_format(floatval($number), 2, '.', ''))[1] ?: '00';
 
@@ -104,11 +117,12 @@ class Slownie
             throw OutOfRangeException::numberIsTooBig();
         }
 
+        // magic goes here :-)
+
         $amountInWords = '';
 
         $lPad = '';
         $kwW = '';
-
 
         $tmp = explode(',', (string) $number);
 
@@ -121,6 +135,7 @@ class Slownie
         $kwW = ($kwW == '') ? $tmp[0] : $kwW;
         $packs = (strlen($kwW) / 3) - 1;
         $pTmp = $packs;
+
         for ($i = 0; $i <= $packs; $i++) {
             $table = self::getCasesTable($pTmp);
 
@@ -131,7 +146,7 @@ class Slownie
             $unitForm = self::getUnitForm($pKw[2]);
             $tenthForm = self::getTenthForm($pKw[2]);
 
-            $kwWs = ($pKw[1] != 1) ? "{$hundredForm} {$dozenForm} {$unitForm}" : "{$hundredForm} {$tenthForm}";
+            $amountPart = ($pKw[1] != 1) ? "{$hundredForm} {$dozenForm} {$unitForm}" : "{$hundredForm} {$tenthForm}";
 
             if (($pKw[0] == 0) && ($pKw[2] == 1) && ($pKw[1] < 1)) {
                 $form = $table[0];
@@ -141,12 +156,12 @@ class Slownie
                 $form = $table[1];
             }
 
-            $isPackEmptyString = (string) preg_replace('/\s+/', '', $kwWs);
+            $isPackEmptyString = (string) preg_replace('/\s+/', '', $amountPart);
 
             if ($isPackEmptyString || in_array($form, self::getPlnCasesTable())) {
-                $amountInWords .= " {$kwWs}";
+                $amountInWords .= " {$amountPart}";
 
-                if ($pTmp != 0 || !$isPlnHidden) {
+                if ($pTmp != 0 || !$hideZlote) {
                     $amountInWords .= " {$form}";
                 }
             }
