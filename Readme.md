@@ -4,6 +4,8 @@
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
 
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/vlaim)
+
 🇵🇱 Ta biblioteka pomaga zapisać liczby w postaci słownej.
 
 
