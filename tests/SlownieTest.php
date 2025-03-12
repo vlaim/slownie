@@ -14,83 +14,71 @@ final class SlownieTest extends TestCase
 
     public function testIsNegativeNumberThrowsException(): void
     {
-        $message = '';
-
-        try {
-            Slownie::convert('-1');
-        } catch (\Exception $exception) {
-            $message = $exception->getMessage();
-        }
-
-        $this->assertEquals($message, 'Provided number should be positive');
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Provided number should be positive');
+        Slownie::convert('-1');
     }
 
     public function testIsTooBigNumberThrowsException(): void
     {
-        $message = '';
-
-        try {
-            Slownie::convert(1000000000000000000);
-        } catch (\Exception $exception) {
-            $message = $exception->getMessage();
-        }
-
-        $this->assertEquals($message, 'Provided number is too big');
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Provided number is too big');
+        Slownie::convert(1000000000000000000);
     }
 
-    public function testIs1CorrectInteger(): void
+    public function testIsZeroCorrect(): void
     {
-        $this->assertSame('jeden złoty 23/100', Slownie::convert(1.23));
+        $this->assertSame('zero złotych 00/100', Slownie::convert(0));
     }
 
-    public function testIs1CorrectString(): void
+    public function testIsDecimalBelowOneCorrect(): void
     {
-        $this->assertSame('jeden złoty 00/100', Slownie::convert('1'));
+        $this->assertSame('zero złotych 99/100', Slownie::convert(0.99));
     }
 
-    public function testIs1CorrectFloat(): void
+    public function testIsSingleDigitCorrect(): void
     {
-        $this->assertSame('jeden złoty 01/100', Slownie::convert(1.01));
+        $this->assertSame('osiem złotych 00/100', Slownie::convert(8));
     }
 
-    public function testIs10Correct(): void
+    public function testIsRoundingCorrect(): void
     {
-        $this->assertSame('dziesięć złotych 89/100', Slownie::convert(10.89));
+        $this->assertSame('jeden złoty 46/100', Slownie::convert(1.456));
     }
 
-    public function testIs100CorrectInteger(): void
+    public function testIsLargeNumberCorrect(): void
     {
-        $this->assertSame('sto cztery złote 10/100', Slownie::convert(104.10));
+        $this->assertSame('dziewięćdziesiąt dziewięć milionów dziewięćset dziewięćdziesiąt dziewięć tysięcy dziewięćset dziewięćdziesiąt dziewięć złotych 99/100', Slownie::convert(99999999.99));
     }
 
-    public function testIs100CorrectFloat(): void
+    public function testIsTrailingZerosHandledCorrectly(): void
     {
-        $this->assertSame('osiemset siedemdziesiąt siedem złotych 88/100', Slownie::convert(877.88));
+        $this->assertSame('sto złotych 00/100', Slownie::convert(100.00));
     }
 
-    public function testIs100CorrectString(): void
+    public function testIsCommaAsDecimalSeparatorHandled(): void
     {
-        $this->assertSame('dziewięćset czterdzieści pięć złotych 03/100', Slownie::convert('945.03'));
+        $this->assertSame('trzy złote 50/100', Slownie::convert('3,50'));
     }
 
-    public function testIs1000CorrectInteger(): void
+    public function testIsWhitespaceInInputHandled(): void
     {
-        $this->assertSame('jeden tysiąc osiem złotych 00/100', Slownie::convert(1008));
+        $this->assertSame('czterysta pięćdziesiąt sześć złotych 78/100', Slownie::convert('  456.78  '));
     }
 
-    public function testIs1000CorrectFloat(): void
+    public function testIsIntegerAsStringWithSpacesCorrect(): void
     {
-        $this->assertSame('dziewięć tysięcy dziewięćset dziewięćdziesiąt dziewięć złotych 34/100', Slownie::convert(9999.34));
+        $this->assertSame('jeden milion złotych 00/100', Slownie::convert('1 000 000'));
     }
 
-    public function testIs10000CorrectFloat(): void
+    public function testIsMixedIntegerAndFloatHandling(): void
     {
-        $this->assertSame('piętnaście tysięcy sześćset sześćdziesiąt osiem złotych 33/100', Slownie::convert(15668.333));
+        $this->assertSame('dwa tysiące pięćset złotych 50/100', Slownie::convert(2500.5));
     }
 
-    public function testIs10000000CorrectFloat(): void
+    public function testIsHandlingLargeRoundNumbers(): void
     {
-        $this->assertSame('dziesięć milionów złotych 00/100', Slownie::convert(10000000));
+        $this->assertSame('pięćdziesiąt milionów złotych 00/100', Slownie::convert(50000000));
     }
 
     public function testIsHideGroszeCorrect(): void
@@ -106,10 +94,5 @@ final class SlownieTest extends TestCase
     public function testIsHideZloteCorrect(): void
     {
         $this->assertSame('dwanaście milionów trzysta trzynaście tysięcy sto dwadzieścia trzy 38/100', Slownie::convert(12313123.38, false, true));
-    }
-
-    public function testIsIntegerAsStringWithSpacesCorrect(): void
-    {
-        $this->assertSame('jeden milion złotych 00/100', Slownie::convert('1 000 000'));
     }
 }
