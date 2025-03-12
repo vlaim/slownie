@@ -105,6 +105,8 @@ class Slownie
      */
     final public static function convert($number, bool $hideGrosze = false, bool $hideZlote = false): string
     {
+        $number = str_replace(',', '.', (string) $number);
+
         $grosze = explode('.', number_format(floatval($number), 2, '.', ''))[1] ?: '00';
 
         $number = intval(preg_replace("/\s+/", '', (string) $number));
@@ -120,6 +122,10 @@ class Slownie
         // magic goes here :-)
 
         $amountInWords = '';
+
+        if ($number == 0) {
+            $amountInWords = 'zero';
+        }
 
         $lPad = '';
         $kwW = '';
