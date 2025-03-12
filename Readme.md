@@ -1,6 +1,6 @@
 # Słownie
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/vlaim/slownie.svg?style=flat-square)](https://packagist.org/packages/swiatprzesylek/gl/)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/vlaim/slownie.svg?style=flat-square)](https://packagist.org/packages/vlaim/slownie)
 ![PHP UNIT](https://github.com/vlaim/slownie/actions/workflows/php.yml/badge.svg)
 
 🇵🇱 **Słownie** to biblioteka PHP umożliwiająca zamianę liczb na zapis słowny w języku polskim.
