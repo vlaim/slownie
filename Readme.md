@@ -1,81 +1,80 @@
 # Słownie
 
-[![Build Status](https://travis-ci.com/vlaim/slownie.svg?token=yjpboQ1s7oorxyxVXyou&branch=master)](https://travis-ci.com/vlaim/slownie)
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE.md)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/vlaim/slownie.svg?style=flat-square)](https://packagist.org/packages/swiatprzesylek/gl/)
+![PHP UNIT](https://github.com/vlaim/slownie/actions/workflows/php.yml/badge.svg)
 
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/vlaim)
+🇵🇱 **Słownie** to biblioteka PHP umożliwiająca zamianę liczb na zapis słowny w języku polskim.
 
-🇵🇱 Ta biblioteka pomaga zapisać liczby w postaci słownej.
+🇬🇧 **Słownie** is a PHP library that converts numbers into words in Polish.
 
+## 📦 Installation
 
-This library helps you to write numbers into words in Polish.
+### Using Composer
 
+Install this package via [Composer](https://getcomposer.org/):
 
-## Installation
-
-### Composer package
-Use composer to install this package.
-
-```
+```json
 {
     "require": {
-        "vlaim/slownie": "1.0.*"
+        "vlaim/slownie": "^1"
     }
 }
 ```
 
+Run:
 
-## Basic usage 
-
+```sh
+composer require vlaim/slownie
 ```
+
+## 🚀 Basic Usage
+
+The main method to convert numbers to words:
+
+```php
 Slownie::convert($number, bool $hideGrosze = false, bool $hideZlote = false)
 ```
 
-$number – number to convert, integer, float or string (not recommended) can be passed here
+### Parameters:
+- **$number** *(int | float | string)* – The number to convert.
+- **$hideGrosze** *(bool, default: false)* – If `true`, omits grosze (00/100).
+- **$hideZlote** *(bool, default: false)* – If `true`, omits "złoty/złotych/złote".
 
-$hideGrosze - hides grosze (00/100)
+### Examples:
 
-$hideZłote - hides złoty form
-
-```
-Slownie::convert(10348) // dziesięć tysięcy trzysta czterdzieści osiem złotych 00/100
-```
-
-To hide grosze pass `true` as the second param
-
-```
-Slownie::convert(10348, true) //  dziesięć tysięcy trzysta czterdzieści osiem złotych
+Convert a number to words:
+```php
+Slownie::convert(10348);
+// Output: "dziesięć tysięcy trzysta czterdzieści osiem złotych 00/100"
 ```
 
-
-To hide złoty / złotych / złote pass `true` as the third param
-
+Hide grosze:
+```php
+Slownie::convert(10348, true);
+// Output: "dziesięć tysięcy trzysta czterdzieści osiem złotych"
 ```
-Slownie::convert(10348, true, true) //  dziesięć tysięcy trzysta czterdzieści osiem 
+
+Hide "złoty/złotych/złote":
+```php
+Slownie::convert(10348, true, true);
+// Output: "dziesięć tysięcy trzysta czterdzieści osiem"
 ```
 
-## Tests
+## 🧪 Running Tests
 
-To run tests
-```
+To run tests, use:
+
+```sh
 composer test
 ```
 
-## Issues
+## 🛠 Issues & Support
 
-Bug reports and feature requests can be submitted on the [Github Issue Tracker](https://github.com/vlaim/slownie/issues). 
+For bug reports and feature requests, visit the [GitHub Issue Tracker](https://github.com/vlaim/slownie/issues).
 
-Feel free to open an issue on every question you have.
+Feel free to open an issue if you have any questions.
 
+## 📜 License
 
-## License
-
-**vlaim/slownie** is released under the MIT License. See the bundled LICENSE.md for details.
-
-[ico-version]: https://img.shields.io/packagist/v/vlaim/slownie.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-
-[link-packagist]: https://packagist.org/packages/vlaim/slownie
-
+**vlaim/slownie** is released under the [MIT License](LICENSE.md).
 
